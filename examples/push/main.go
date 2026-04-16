@@ -7,11 +7,13 @@ import (
 )
 
 func main() {
-	// Platform: all
+	// Platform: specify platforms
 	var pf jpush.Platform
 	pf.Add(jpush.ANDROID)
 	pf.Add(jpush.IOS)
 	pf.Add(jpush.WINPHONE)
+	pf.Add(jpush.QUICKAPP)
+	pf.Add(jpush.HMOS)
 	// pf.All()
 
 	// Audience: tag
@@ -28,6 +30,8 @@ func main() {
 	n.SetAndroid(&jpush.AndroidNotification{Alert: "alert", Title: "title"})
 	n.SetIos(&jpush.IosNotification{Alert: "alert", Badge: 1})
 	n.SetWinPhone(&jpush.WinPhoneNotification{Alert: "alert"})
+	n.SetQuickApp(&jpush.QuickAppNotification{Alert: "alert", Title: "QA Title", Page: "/page1"})
+	n.SetHmos(&jpush.HmosNotification{Alert: "hmos alert", Title: "hmos title", Intent: map[string]interface{}{"url": "scheme://test?key=1"}})
 
 	// Message
 	var m jpush.Message

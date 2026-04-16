@@ -6,6 +6,7 @@ type Notification struct {
 	Android       *AndroidNotification   `json:"android,omitempty"`        // Android通知
 	Ios           *IosNotification       `json:"ios,omitempty"`            // iOS通知
 	QuickApp      *QuickAppNotification  `json:"quick_app,omitempty"`      // 快应用通知
+	Hmos          *HmosNotification      `json:"hmos,omitempty"`           // 鸿蒙通知
 	WinPhone      *WinPhoneNotification  `json:"winphone,omitempty"`       // Windows Phone通知
 	Voip          map[string]interface{} `json:"voip,omitempty"`           // iOS VOIP功能。
 }
@@ -55,6 +56,26 @@ type QuickAppNotification struct {
 	Extras map[string]interface{} `json:"extras,omitempty"` // 扩展字段, 这里自定义 Key / value 信息，以供业务使用。
 }
 
+type HmosNotification struct {
+	Alert             string                 `json:"alert"`
+	Title             string                 `json:"title,omitempty"`
+	Intent            map[string]interface{} `json:"intent,omitempty"`
+	BadgeAddNum       int                    `json:"badge_add_num,omitempty"`
+	BadgeSetNum       int                    `json:"badge_set_num,omitempty"`
+	Extras            map[string]interface{} `json:"extras,omitempty"`
+	Category          string                 `json:"category,omitempty"`
+	TestMessage       bool                   `json:"test_message,omitempty"`
+	ReceiptId         string                 `json:"receipt_id,omitempty"`
+	LargeIcon         string                 `json:"large_icon,omitempty"`
+	Style             int                    `json:"style,omitempty"`
+	PushType          int                    `json:"push_type,omitempty"`
+	HmPayload         interface{}            `json:"hm_payload,omitempty"`
+	ExtraData         string                 `json:"extra_data,omitempty"`
+	DisplayForeground string                 `json:"display_foreground,omitempty"`
+	Sound             string                 `json:"sound,omitempty"`
+	SoundDuration     int                    `json:"sound_duration,omitempty"`
+}
+
 type WinPhoneNotification struct {
 	Alert    string                 `json:"alert"`                // 通知内容, 必填字段，会填充到 toast 类型 text2 字段上。这里指定了，将会覆盖上级统一指定的 alert 信息；内容为空则不展示到通知栏。
 	Title    string                 `json:"title,omitempty"`      // 通知标题, 会填充到 toast 类型 text1 字段上。
@@ -85,6 +106,11 @@ func (n *Notification) SetIos(ios *IosNotification) {
 // SetQuickApp 设置 QuickApp 通知
 func (n *Notification) SetQuickApp(quickApp *QuickAppNotification) {
 	n.QuickApp = quickApp
+}
+
+// SetHmos 设置 HarmonyOS 通知
+func (n *Notification) SetHmos(hmos *HmosNotification) {
+	n.Hmos = hmos
 }
 
 // SetWinPhone 设置 WinPhone 通知

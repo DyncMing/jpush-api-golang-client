@@ -76,5 +76,21 @@ if err != nil {
 
 完整推送与 CID 样例见 `examples/`。
 
+## 厂商通道（third_party_channel）
+
+可以通过 `Options.ThirdPartyChannel` 配置针对厂商的下发参数。鸿蒙平台对应的常量名为 `HMOS_CHANNEL`。
+
+示例：
+
+```go
+opts := jpush.ThirdPartyOptions{
+	Distribution: "jpush",
+	LargeIcon:    "https://example.com/icon.png",
+}
+o := &jpush.Options{}
+o.AddHmosChannel(opts) // AddHmosChannel 是为 HMOS 提供的便捷方法
+// 或者： o.AddThirdPartyChannel(jpush.HMOS_CHANNEL, opts)
+```
+
 ## 短信
 已支持模板短信发送，示例见 `sms_test.go`。运行前请填写自己的 `appKey`/`masterSecret` 和模板参数。

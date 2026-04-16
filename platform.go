@@ -8,6 +8,8 @@ const (
 	IOS      PlatformType = "ios"
 	ANDROID  PlatformType = "android"
 	WINPHONE PlatformType = "winphone"
+	QUICKAPP PlatformType = "quickapp"
+	HMOS     PlatformType = "hmos"
 )
 
 type Platform struct {
@@ -54,6 +56,10 @@ func (p *Platform) Add(os PlatformType) error {
 	case ANDROID:
 		fallthrough
 	case WINPHONE:
+		fallthrough
+	case QUICKAPP:
+		fallthrough
+	case HMOS:
 		p.osArray = append(p.osArray, string(os))
 		p.Os = p.osArray
 	default:
@@ -76,6 +82,16 @@ func (p *Platform) AddAndroid() {
 // AddWinphone add winphone platform
 func (p *Platform) AddWinphone() {
 	_ = p.Add(WINPHONE)
+}
+
+// AddQuickApp add quickapp platform
+func (p *Platform) AddQuickApp() {
+	_ = p.Add(QUICKAPP)
+}
+
+// AddHmos add hmos (HarmonyOS) platform
+func (p *Platform) AddHmos() {
+	_ = p.Add(HMOS)
 }
 
 // Remove remove platform

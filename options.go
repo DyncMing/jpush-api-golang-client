@@ -17,12 +17,13 @@ func (t ThirdChannelType) String() string {
 }
 
 const (
-	XIAOMI ThirdChannelType = "xiaomi"
-	HUAWEI ThirdChannelType = "huawei"
-	MEIZU  ThirdChannelType = "meizu"
-	OPPO   ThirdChannelType = "oppo"
-	VIVO   ThirdChannelType = "vivo"
-	FCM    ThirdChannelType = "fcm"
+	XIAOMI       ThirdChannelType = "xiaomi"
+	HUAWEI       ThirdChannelType = "huawei"
+	MEIZU        ThirdChannelType = "meizu"
+	OPPO         ThirdChannelType = "oppo"
+	VIVO         ThirdChannelType = "vivo"
+	FCM          ThirdChannelType = "fcm"
+	HMOS_CHANNEL ThirdChannelType = "hmos"
 )
 
 type ThirdPartyOptions struct {
@@ -45,6 +46,17 @@ type ThirdPartyOptions struct {
 	BigPicPath            string      `json:"big_pic_path,omitempty"`           //厂商big_pic_path, 为了适配厂商的消息大图片样式,目前支持小米/oppo两个厂商
 	OnlyUseVendorStyle    bool        `json:"only_use_vendor_style,omitempty"`  //是否是否使用自身通道设置样式
 	CallbackId            string      `json:"callback_id,omitempty"`            // vivo厂商通道回调ID
+	// HMOS specific
+	HmPayload         interface{} `json:"hm_payload,omitempty"`         // 鸿蒙卡片/实况窗消息体
+	ReceiptId         string      `json:"receipt_id,omitempty"`         // 华为/鸿蒙回执 ID
+	PushType          int         `json:"push_type,omitempty"`          // 鸿蒙 push_type
+	TestMessage       bool        `json:"test_message,omitempty"`       // 鸿蒙 test_message 标识
+	BadgeAddNumHmos   int         `json:"badge_add_num,omitempty"`      // 鸿蒙角标累加值
+	BadgeSetNumHmos   int         `json:"badge_set_num,omitempty"`      // 鸿蒙角标设置值
+	ExtraData         string      `json:"extra_data,omitempty"`         // 鸿蒙 extra_data 字段
+	DisplayForeground string      `json:"display_foreground,omitempty"` // 鸿蒙前台显示策略
+	Sound             string      `json:"sound,omitempty"`              // 鸿蒙自定义铃声
+	SoundDuration     int         `json:"sound_duration,omitempty"`     // 鸿蒙自定义铃声时长（秒）
 }
 
 type ThirdPartyChannel map[string]ThirdPartyOptions
@@ -80,4 +92,9 @@ func (o *Options) AddThirdPartyChannel(channel ThirdChannelType, value ThirdPart
 		o.ThirdPartyChannel = make(ThirdPartyChannel)
 	}
 	o.ThirdPartyChannel[channel.String()] = value
+}
+
+// AddHmosChannel is a convenience wrapper to add HMOS (HarmonyOS) third-party options.
+func (o *Options) AddHmosChannel(value ThirdPartyOptions) {
+	o.AddThirdPartyChannel(HMOS_CHANNEL, value)
 }

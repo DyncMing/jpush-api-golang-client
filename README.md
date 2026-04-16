@@ -76,6 +76,22 @@ if err != nil {
 
 See `examples/` for full push and CID samples.
 
+## Third-party channel (厂商通道)
+
+You can set per-vendor delivery options via `Options.ThirdPartyChannel`. The Go constant for HarmonyOS channel is `HMOS_CHANNEL`.
+
+Example:
+
+```go
+opts := jpush.ThirdPartyOptions{
+	Distribution: "jpush",
+	LargeIcon:    "https://example.com/icon.png",
+}
+o := &jpush.Options{}
+o.AddHmosChannel(opts) // convenience wrapper for HMOS channel
+// or: o.AddThirdPartyChannel(jpush.HMOS_CHANNEL, opts)
+```
+
 ## SMS
 Template SMS send is available (see `sms_test.go` for an end-to-end example). Fill your own `appKey`/`masterSecret` and template params before running tests.
 

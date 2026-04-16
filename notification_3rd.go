@@ -12,6 +12,28 @@ type Notification3rd struct {
 	BadgeClass  string                 `json:"badge_class,omitempty"`   // 桌面图标对应的应用入口Activity类， 比如“com.test.badge.MainActivity；
 	Sound       string                 `json:"sound,omitempty"`         // 填写Android工程中/res/raw/路径下铃声文件名称，无需文件名后缀；注意：针对Android 8.0以上，当传递了channel_id 时，此属性不生效。
 	Extras      map[string]interface{} `json:"extras,omitempty"`        // 扩展字段；这里自定义 JSON 格式的 Key / Value 信息，以供业务使用。
+	// HMOS (HarmonyOS) v2 支持的补发厂商通知体，与 notification.hmos 保持一致
+	Hmos *HmosNotification3rd `json:"hmos,omitempty"`
+}
+
+type HmosNotification3rd struct {
+	Alert             string                 `json:"alert,omitempty"`
+	Title             string                 `json:"title,omitempty"`
+	Intent            map[string]interface{} `json:"intent,omitempty"`
+	BadgeAddNum       int                    `json:"badge_add_num,omitempty"`
+	BadgeSetNum       int                    `json:"badge_set_num,omitempty"`
+	Extras            map[string]interface{} `json:"extras,omitempty"`
+	Category          string                 `json:"category,omitempty"`
+	TestMessage       bool                   `json:"test_message,omitempty"`
+	ReceiptId         string                 `json:"receipt_id,omitempty"`
+	LargeIcon         string                 `json:"large_icon,omitempty"`
+	Style             int                    `json:"style,omitempty"`
+	PushType          int                    `json:"push_type,omitempty"`
+	HmPayload         interface{}            `json:"hm_payload,omitempty"`
+	ExtraData         string                 `json:"extra_data,omitempty"`
+	DisplayForeground string                 `json:"display_foreground,omitempty"`
+	Sound             string                 `json:"sound,omitempty"`
+	SoundDuration     int                    `json:"sound_duration,omitempty"`
 }
 
 // SetTitle 设置标题
@@ -61,4 +83,9 @@ func (n *Notification3rd) SetSound(sound string) {
 // SetExtras 设置扩展字段
 func (n *Notification3rd) SetExtras(extras map[string]interface{}) {
 	n.Extras = extras
+}
+
+// SetHmos 设置鸿蒙补发通知体
+func (n *Notification3rd) SetHmos(h *HmosNotification3rd) {
+	n.Hmos = h
 }
