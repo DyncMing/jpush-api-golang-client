@@ -4,7 +4,7 @@
 JPush 推送/短信的 Go 语言服务器端 SDK，提供对 JPush REST API（推送、定时、报表、CID、短信等）的轻量封装，补齐官方示例缺失的能力，方便在后端服务中直接集成。
 
 ## Tech Stack
-- Go 1.22 模块 `github.com/Scorpio69t/jpush-api-golang-client`
+- Go 1.22 模块 `github.com/DyncMing/jpush-api-golang-client`
 - 仅使用标准库（net/http、encoding/json、time/strconv 等），无三方依赖
 - 自带简化的 HTTP 辅助封装（`httplib.go`、`httpclient.go`），用于构造带 Basic Auth 的请求
 - 提供 `examples/` 示例演示推送与 CID 获取流程

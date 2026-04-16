@@ -16,7 +16,7 @@ Supported today:
 
 ## Install
 ```bash
-go get github.com/Scorpio69t/jpush-api-golang-client
+go get github.com/DyncMing/jpush-api-golang-client
 ```
 
 ## Quickstart (Push)

@@ -16,7 +16,7 @@
 
 ## 安装
 ```bash
-go get github.com/Scorpio69t/jpush-api-golang-client
+go get github.com/DyncMing/jpush-api-golang-client
 ```
 
 ## 推送快速开始
